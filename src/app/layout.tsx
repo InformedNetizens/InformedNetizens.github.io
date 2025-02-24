@@ -1,34 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist as FontSans } from "next/font/google";
 import "./globals.css";
+import NavigationMenu from "@/components/NavigationMenu";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const fontSans = FontSans({
+   variable: "--font-sans",
+   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Informed Netizens",
-  description: "You will be informed soon!",
+   title: "Informed Netizens",
+   description: "You will be informed soon!",
 };
 
 export default function RootLayout({
-  children,
+   children,
 }: Readonly<{
-  children: React.ReactNode;
+   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+   return (
+      <html lang="en">
+         <body className={`${fontSans.variable} font-sans antialiased`}>
+            <NavigationMenu />
+            {children}
+         </body>
+      </html>
+   );
 }
