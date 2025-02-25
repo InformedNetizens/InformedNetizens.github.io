@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
    images: {
       unoptimized: true,
    },
+   experimental: {
+      mdxRs: true,
+   },
+   transpilePackages: ["next-mdx-remote"],
 };
 
 export default nextConfig;
