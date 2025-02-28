@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function NavigationMenu() {
    return (
-      <header className="h-20 flex items-center">
+      <header className="fixed inset-x-0 top-0 h-20 flex items-center bg-white/75 backdrop-blur">
          <nav
             className="container py-3 relative flex justify-between md:grid grid-cols-3 items-center"
             aria-label="Main Navigation"
