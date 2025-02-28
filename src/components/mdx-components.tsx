@@ -5,10 +5,10 @@ import Link from "next/link";
 export const MDXComponents = {
    // Headings
    h1: ({ children }: ComponentPropsWithoutRef<"h1">) => (
-      <h1 className="mt-8 mb-4 text-2xl text-foreground font-bold">{children}</h1>
+      <h1 className="mt-7 text-2xl text-foreground font-bold">{children}</h1>
    ),
    h2: ({ children }: ComponentPropsWithoutRef<"h2">) => (
-      <h2 className="mt-8 mb-4 text-xl text-foreground font-semibold">{children}</h2>
+      <h2 className="mt-7 text-xl text-foreground font-semibold">{children}</h2>
    ),
    h3: ({ children }: ComponentPropsWithoutRef<"h3">) => (
       <h3 className="mt-4 mb-2 text-lg text-foreground font-semibold leading-none">{children}</h3>
@@ -24,7 +24,7 @@ export const MDXComponents = {
 
    // Paragraphs
    p: ({ children }: ComponentPropsWithoutRef<"p">) => (
-      <p className="my-4 leading-relaxed text-muted-foreground">{children}</p>
+      <p className="p leading-relaxed text-muted-foreground">{children}</p>
    ),
 
    // Image
@@ -62,10 +62,10 @@ export const MDXComponents = {
 
    // List elements
    ul: ({ children }: ComponentPropsWithoutRef<"ul">) => (
-      <ul className="list-disc pl-5 space-y-2">{children}</ul>
+      <ul className="p list-disc pl-5 space-y-2">{children}</ul>
    ),
    ol: ({ children }: ComponentPropsWithoutRef<"ol">) => (
-      <ol className="list-decimal pl-5 space-y-2">{children}</ol>
+      <ol className="p list-decimal pl-5 space-y-2">{children}</ol>
    ),
    li: ({ children }: ComponentPropsWithoutRef<"li">) => (
       <li className="text-secondary-foreground">{children}</li>
@@ -88,7 +88,7 @@ export const MDXComponents = {
 
    // Blockquote
    blockquote: ({ children }: ComponentPropsWithoutRef<"blockquote">) => (
-      <blockquote className="border-l-4 pl-4 italic text-muted-foreground border-border">
+      <blockquote className="p mt-4 border-l-4 pl-4 italic text-muted-foreground border-border">
          {children}
       </blockquote>
    ),

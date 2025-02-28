@@ -1,7 +1,6 @@
-import fs from "fs";
 import path from "path";
+import { promises as fs } from "fs";
 import { formatDate } from "@/lib/utils";
-import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { MDXComponents } from "@/components/mdx-components";
 
@@ -13,23 +12,36 @@ type frontmatterType = {
 };
 
 export async function generateStaticParams() {
-   const blogDir = path.join(process.cwd(), "src/data/blogs");
-   const filenames = fs.readdirSync(blogDir);
-
+   const filenames = await fs.readdir(path.join(process.cwd(), "src/data/blogs"));
    return filenames.map((filename) => ({
       slug: filename.replace(".mdx", ""),
    }));
 }
 
-const BlogPost = async ({ params }: { params: { slug: string } }) => {
-   const slug = (await params).slug;
-   const filePath = path.join(process.cwd(), "src/data/blogs", `${slug}.mdx`);
+export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }) => {
+   const { slug } = await params;
+   const fileContent = await fs.readFile(
+      path.join(process.cwd(), "src/data/blogs", `${slug}.mdx`),
+      "utf-8"
+   );
+   const { frontmatter } = await compileMDX<frontmatterType>({
+      source: fileContent,
+      options: { parseFrontmatter: true },
+      components: MDXComponents,
+   });
 
-   if (!fs.existsSync(filePath)) {
-      notFound();
-   }
+   return {
+      title: frontmatter.title,
+      description: frontmatter.summary,
+   };
+};
 
-   const fileContent = fs.readFileSync(filePath, "utf-8");
+const BlogPost = async ({ params }: { params: Promise<{ slug: string }> }) => {
+   const { slug } = await params;
+   const fileContent = await fs.readFile(
+      path.join(process.cwd(), "src/data/blogs", `${slug}.mdx`),
+      "utf-8"
+   );
    const { content, frontmatter } = await compileMDX<frontmatterType>({
       source: fileContent,
       options: { parseFrontmatter: true },
